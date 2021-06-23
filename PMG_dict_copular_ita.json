@@ -1,0 +1,81 @@
+{
+	"le":
+        {
+            "label": [{"0":"D"}],
+            "expected": [{"0":"top","1":"case","2":"D"}],
+            "expect": [{"0":"N"}],
+            "agree": "3.p"
+        },
+    "la":
+        {
+            "label": [{"0":"NP"}],
+            "expected": [{"0":"NP"}],
+            "expect": [{"1":"N"}],
+            "agree": "3.p"
+        },
+    "foto":
+        {
+            "label": [{"0":"N"}],
+            "expected": [{"0":"N"}],
+            "expect": [{"0": "P"}],
+            "agree": "3.p"
+        },
+    "muro":
+        {
+            "label": [{"0":"N"}],
+            "expected": [{"0":"N"}],
+            "expect": [{}],
+            "agree": "3.p"
+        },
+    "del":
+        {
+            "label": [{"0":"P", "1":"D"}],
+            "expected": [{"0":"P"}],
+            "expect": [{"0": "N"}],
+            "agree": ""
+        },
+    "della":
+        {
+            "label": [{"0":"P", "1":"D"}],
+            "expected": [{"0":"P"}],
+            "expect": [{"0": "N"}],
+            "agree": ""
+        },
+    "pro":
+        {
+            "label": [{"0":"D"}],
+            "expected": [{"0":"case"}],
+            "expect": [{}],
+            "agree": "3.p"
+        },
+        
+    "causa":
+        {
+            "label": [{"0":"N"}],
+            "expected": [{"0":"N"}],
+            "expect": [{"0":"D","1":"P"}],
+            "agree": ""
+        },
+    "rivolta":
+        {
+            "label": [{"0":"N"}],
+            "expected": [{"0":"N"}],
+            "expect": [{}],
+            "agree": ""
+        },
+        
+    "sono":
+        {
+            "label": [{"0":"T"}],
+            "expected": [{"0":"T"}],
+            "expect": [{"0":"case", "1":"NP"}],
+            "agree": "3.p"
+        },
+    "ROOT":
+        {
+            "label": [{"0":"C"}],
+            "expected": [{"0":"C"}],
+            "expect": [{"0":"top", "1":"T"}],
+            "agree": "3.p"
+        }
+}
