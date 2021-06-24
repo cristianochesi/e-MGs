@@ -32,7 +32,7 @@ Also a parameterization file (json format) is provided, specifying mandatory agr
 
 `MG_parser.py` implements the basic Top-Down parsing algoritm (lexical ambiguity resolution still to be implemented)
 
-`MG_generator.py` - implements the basic Top-Down generation algorithm; this is an interactive procedure that ask you to pick up a ROOT node then feed the structure with your input
+`MG_generator.py` implements the basic Top-Down generation algorithm; this is an interactive procedure that ask you to pick up a ROOT node then feed the structure with your input
 
 `MG_tree.py` implements an useful funzion print_node(MG_done) that print the tree in LATEX-FOREST format as in Kobele et al. 2013, Graf et al. 2017
 
