@@ -4,8 +4,8 @@ Phase-based Minimalist Grammars (v 0.1)
 
 This is a simple Python3 implementation of the Phase-based Minimalist Grammar (PMG) as discussed in Chesi 2021.
 Merge is extectation-based, that is, each categorory (X) must be selected by a superordinate note (=X).
-Items with unexpected unlicensed categories are moved in the Memory-buffer of the superordinate node and trasmitted to sequential phases (last-selected categories).
-Items selected while the superordinate node has other selection features are "nested phases" and cannot receive any pending item (unless they become sequential at some point of the derivation and "late expansion" of selectin is permitted by parsing parameterization)
+Items with unexpected categories are moved in the Memory-buffer of the superordinate node and trasmitted to sequential phases (last-selected categories).
+Items selected while the superordinate node has other selection features are "nested phases" and cannot receive any pending item (unless they become sequential at some point of the derivation and "late expansion" of selection is permitted by parsing parameterization)
 
 Background
 ----------
@@ -44,7 +44,7 @@ Basic complexity Metrics inspired by Graf et al. 2017, Kobele et al. 2013 includ
 
 FIXME
 ------------------
-- lexicon should be implemented with TRIE (Chesi 2019, Stabler 2013)
-- memory structure should be implemented with TRIE <- blocking RelM full measure implementation
-- Derivation tree must be created by (deep)copying nodes: features are destroyed when succesfull structure building operations apply, then in this format the node is a bit "flat" and dependency-like
+- lexicon should be implemented using TRIE-like structure (Chesi 2019, Stabler 2013)
+- memory structure should be implemented using TRIE-like structure <- blocking RelM full measure implementation
+- Constituency tree must be created by (deep)copying nodes: features are destroyed when succesfull structure building operations apply, then in this format the node is a bit "flat" and dependency-like (index tell us in which order the items are placed)
 - parameterization must be fully expanded (late expansion, pied-piping and expectation stacking, see Chesi & Brattico 2018)
