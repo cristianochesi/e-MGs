@@ -30,9 +30,9 @@ Also a parameterization file (json format) is provided, specifying mandatory agr
 
 `MG_grammar.py` implements the basic Merge, Move and Agree structure building operations.
 
-`MG_parser.py` implements the basic Top-Down parsing algoritm.
+`MG_parser.py` implements the basic Top-Down parsing algoritm (lexical ambiguity resolution still to be implemented)
 
-`MG_generator.py` - to be implemented
+`MG_generator.py` - implements the basic Top-Down generation algorithm; this is an interactive procedure that ask you to pick up a ROOT node then feed the structure with your input
 
 `MG_tree.py` implements an useful funzion print_node(MG_done) that print the tree in LATEX-FOREST format as in Kobele et al. 2013, Graf et al. 2017
 
@@ -44,7 +44,7 @@ Basic complexity Metrics inspired by Graf et al. 2017, Kobele et al. 2013 includ
 
 FIXME
 ------------------
-- PMG_generation.py porting from Java incomplete
 - lexicon should be implemented with TRIE (Chesi 2019, Stabler 2013)
 - memory structure should be implemented with TRIE <- blocking RelM full measure implementation
-- Derivation tree must be created (deep)copying nodes: features are destroyed when succesfull structure building operations apply
+- Derivation tree must be created by (deep)copying nodes: features are destroyed when succesfull structure building operations apply, then in this format the node is a bit "flat" and dependency-like
+- parameterization must be fully expanded (late expansion, pied-piping and expectation stacking, see Chesi & Brattico 2018)
