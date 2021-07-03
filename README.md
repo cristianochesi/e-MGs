@@ -1,5 +1,5 @@
 # PMG
-Phase-based Minimalist Grammars (v 0.1)
+Phase-based Minimalist Grammars (v 0.2)
 ===================================================
 
 This is a simple Python3 implementation of the Phase-based Minimalist Grammar (PMG) as discussed in Chesi 2021.
@@ -30,13 +30,13 @@ Also a parameterization file (json format) is provided, specifying mandatory agr
 
 `MG_grammar.py` implements the basic Merge, Move and Agree structure building operations.
 
-`MG_parser.py` implements the basic Top-Down parsing algoritm (lexical ambiguity resolution still to be implemented)
+`MG_generate.py` implements the basic Top-Down structure building algoritm (lexical ambiguity is implemented asking the user to pick up a relevant item among the ones compatible). The procedure is equivalent in Parsing and Generation (this is why v.01 parsing and generation scripts are removed from this release): both in parsing and in generation the input string must be considered feeding the algorithm on a word-by-word pace. Play with ambiguity and knowledge asimmetries between the speaker and the listener to resolve the ambiguity and see the difference in terms of complexity
 
-`MG_generator.py` implements the basic Top-Down generation algorithm; this is an interactive procedure that ask you to pick up a ROOT node then feed the structure with your input
+`PMG_complexity_metrics.py` implements the basic set of complexity metrics (both on-line, word-by-word, and off-line; the second should correlate with general acceptability)
 
-`MG_tree.py` implements an useful funzion print_node(MG_done) that print the tree in LATEX-FOREST format as in Kobele et al. 2013, Graf et al. 2017
+`MG_tree.py` implements an useful funzion print_node(MG_done) that print the tree in LATEX-FOREST format as in Kobele et al. 2013, Graf et al. 2017 (this is a compact dependency-like tree)
 
-`MG_xx.py` provide other utilities to deal with Nodes and Trees - some fixes needed
+`MG_utilitis.py` provide other utilities to deal with Nodes search, tree and complexity metrics printing
 
 Complexity Metrics
 ------------------
@@ -47,4 +47,4 @@ FIXME
 - lexicon should be implemented using TRIE-like structure (Chesi 2019, Stabler 2013)
 - memory structure should be implemented using TRIE-like structure <- blocking RelM full measure implementation
 - Constituency tree must be created by (deep)copying nodes: features are destroyed when succesfull structure building operations apply, then in this format the node is a bit "flat" and dependency-like (index tell us in which order the items are placed)
-- parameterization must be fully expanded (late expansion, pied-piping and expectation stacking, see Chesi & Brattico 2018)
+- parameterization must be fully expanded (antilocality, late expansion, pied-piping and expectation stacking, see Chesi & Brattico 2018)
