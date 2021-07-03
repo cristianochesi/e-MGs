@@ -1,14 +1,11 @@
-def remove_expect(node):
-	return node.expect.pop(0)
+import copy
+import math
+from PMG_complexity_metrics import *
 
 
-def remove_expected(node):
-	return node.expected.pop(0)
-
-
-def print_measures(t):
+def print_offline_measures(t):
 	# fixme: to be expanded
-	print("\n---Measures--------------")
+	print("\n---Offline-Measures------")
 	print("Sentence: " + t.sentence)
 	print("Steps: " + str(t.step))
 	print("Pending items im mem: " + str(len(t.mg.current_node.mem)))
@@ -19,18 +16,69 @@ def print_measures(t):
 		print("Prediction: GRAMMATICAL")
 	else:
 		print("Prediction: UNGRAMMATICAL")
-	print("MaxD: " + str(t.maxD))
-	print("Move failures: " + str(t.move_failures))
-	print("MaxT: " + str(t.maxT))
-	print("SumT: " + str(t.sumT))
-	print("MaxS: " + str(t.maxS))
-	print("RelM: " + str(t.relM))
+	print("Move failures: " + str(get_move_failures()))
+	print("Ambiguities: " + str(get_MaxD()))
+	print("MaxD: " + str(get_MaxD()))
+	print("MaxT: " + str(get_MaxT()))
+	print("SumT: " + str(get_SumT()))
+	print("MaxS: " + str(get_MaxS()))
+	print("RelM: " + str(get_RelM()))
+
+
+def print_online_measures(t):
+	print("\n---Online-Measures------")
+	words = t.sentence.split()
+	print("Sentence:\t", end='')
+	for word in words:
+		print(word + "\t", end='')
+	print("\nENCODING:\t", end='')
+	nodes = copy.deepcopy(t.nodes)
+	for word in words:
+		cw = find_word(nodes, word)
+		print(str(cw.encoding) + "\t", end='')
+	print("\nINTEGRATION:\t", end='')
+	nodes = copy.deepcopy(t.nodes)
+	pw = PMG_node.PMG_node("", [], [], [], "")
+	pw.index = 0
+	for word in words:
+		cw = find_word(nodes, word)
+		enc = cw.index - pw.index
+		pw = cw
+		print(str(enc) + "\t", end='')
+	print("\nRETRIEVAL:\t", end='')
+	nodes = copy.deepcopy(t.nodes)
+	for word in words:
+		print(str(get_retrieval_cost(nodes, word)) + "\t", end='')
+
+
+def find_word(nodes, word):
+	node = PMG_node.PMG_node("", [], [], [], "")
+	for n in range(0, len(nodes)):
+		if nodes[n].phon == word:
+			node = nodes[n]
+			nodes.pop(n)
+			break
+	return node
+
+
+def get_retrieval_cost(nodes, word):
+	retrieval = 0
+	for n in range(0, len(nodes)):
+		if nodes[n].phon == word:
+			if len(nodes[n].children) >= 1:
+				for child in nodes[n].children:
+					if child.phon.startswith("$t"):
+						# print(child.phon + ": " + str(child.mem_outdex) + " - " + str(child.mem_index))
+						retrieval += round(math.log(child.mem_outdex - child.mem_index)*len(nodes[n].children), 2)
+	return retrieval
 
 
 def print_tree(t):
 	print("\n---Tree------------------")
+	print("\\begin{forest}")
 	t.tree.print_node(t.mg.root)
 	t.tree.print_annotations()
+	print("\\end{forest}")
 
 
 def check_choice(choice, size):
@@ -42,4 +90,3 @@ def check_choice(choice, size):
 	except ValueError:
 		check = False
 	return check
-

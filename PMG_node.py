@@ -1,3 +1,6 @@
+import copy
+
+
 class PMG_node:
 
 	def __init__(self, phon, expect, expected, label, agree):
@@ -14,10 +17,14 @@ class PMG_node:
 		self.mem_outdex = 0
 		self.parent = None
 		self.superordinate_phase = None
+		self.nesting_level = 0
 		self.children = []
 		self.ambiguous = []
 		self.mem = []
+		self.ref = []
 		self.in_mem = False
+		self.encoding = 0
+		self.retrieval = 0
 
 	def get_parent(self):
 		return self.parent
@@ -112,3 +119,25 @@ class PMG_node:
 				return False
 		else:
 			return False
+
+	def attach(self, node):
+		node_copy = copy.deepcopy(self)
+		node_copy.name = self.name + "_copy"
+		self.substitute(node_copy)
+		self.parent = node_copy
+		node.parent = node_copy
+		if self.has_expected():
+			node_copy.children.append(node)
+			node_copy.children.append(self)
+		else:
+			node_copy.children.append(self)
+			node_copy.children.append(node)
+
+	def substitute(self, node_copy):
+		if self.has_parent():
+			for n in self.parent.children:
+				if n == self:
+					print("substitution done:")
+					print(n)
+					print(node_copy)
+					n = node_copy

@@ -21,7 +21,8 @@ class PMG_tree:
 		else:
 			# print(self.indent + "[" + node.phon + ", label=" + node.get_label() + " , name=" + node.name + "]") # fixme: better format with complete information, but remember to make deepcopies!
 			print(self.indent + "[" + node.phon + " , name=" + node.name + "]")
-			if node.mem_outdex != 0:
+			self.annotation = self.annotation + "\n%\n\\node[index] at (" + node.name + ") {" + str(node.index) + "};\n\\node[outdex] at (" + node.name + ") {" + str(node.outdex) + "};"
+			if node.in_mem:
 				if not self.movement == "":
 					self.new_line = "\n"
 				self.movement = self.movement + self.new_line + "\\draw[move = {canonical}] (" + str(node.mem_index) + ") to[out = west, in =south west] (" + str(node.mem_outdex) + ");"
