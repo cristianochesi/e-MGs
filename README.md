@@ -36,7 +36,7 @@ Also a parameterization file (json format) is provided, specifying mandatory agr
 
 `MG_tree.py` implements an useful funzion print_node(MG_done) that print the tree in LATEX-FOREST format as in Kobele et al. 2013, Graf et al. 2017 (this is a compact dependency-like tree)
 
-`MG_utilitis.py` provide other utilities to deal with Nodes search, tree and complexity metrics printing
+`MG_utilities.py` provide other utilities to deal with Nodes search, tree and complexity metrics printing
 
 Complexity Metrics
 ------------------
