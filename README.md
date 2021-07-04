@@ -27,7 +27,8 @@ Quick Start Guide
 -----------------
 To run excecute this file in your Python shell (or run 'Python3 <what follows>' from command line):
 
-e.g. 'PMG_start.py -i "a a a b b b" -l lexicon\PMG_dict_ab.json -p parameters\PMG_param_default.json' 
+e.g. `PMG_start.py -i "a a a b b b" -l lexicon\PMG_dict_ab.json -p parameters\PMG_param_default.json` 
+  (notice that ambiguity must be resolved in-line)
   
 
 `PMG_start.py` gets an input string `-i`, a lexicon file in json format `-l` and a parameter set `-p`. Simple lexica are provided to test the capabilities of the grammar (`PMG_dict_ab.json` implement counting recursion, `PMG_dict_RC.json` simple examples of Relative Clauses in English, `PMG_dict_copular_ita` include some classic example of subectraction from copular sentences etc.).
