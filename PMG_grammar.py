@@ -128,6 +128,7 @@ class PMG_grammar:
 		expect = []
 		expected = []
 		label = []
+		ambiguous = []
 		n = 0
 		for x in self.lex[w]['expect'][0]:
 			expect.insert(n, self.lex[w]['expect'][0][x])
@@ -140,7 +141,13 @@ class PMG_grammar:
 		for x in self.lex[w]['label'][0]:
 			label.insert(n, self.lex[w]['label'][0][x])
 			n += 1
+		if 'ambiguous' in self.lex[w]:
+			n = 0
+			for x in self.lex[w]['ambiguous'][0]:
+				ambiguous.insert(n, self.lex[w]['ambiguous'][0][x])
+				n += 1
 		w_tagged = PMG_node.PMG_node(w, expect, expected, label, self.lex[w]['agree'])
+		w_tagged.ambiguous = ambiguous
 		if self.needs_agree(w_tagged):
 			w_tagged.requires_agree = True
 		w_tagged.index = 0
@@ -151,14 +158,17 @@ class PMG_grammar:
 		self.root = node
 		self.current_node = self.root
 
-	def phase_up(self, cn: PMG_node):
+	def phase_up(self, cn: PMG_node) -> bool:
+		raise_up = True
 		while not cn.has_expect():
 			if cn.parent:
 				self.current_node = cn.parent
 				cn = self.current_node
 			else:
 				print("\t\tPHASE FAILURE: superordinate phase not available")
+				raise_up = False
 				break
+		return raise_up
 
 	def set_param_agree(self, nodes: []):
 		self.agr_cats = nodes

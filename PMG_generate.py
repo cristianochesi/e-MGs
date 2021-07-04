@@ -60,12 +60,14 @@ class PMG_generate:
 				w = self.mg.select(self.word)
 				if len(w.ambiguous) > 0:  # lexical ambiguity is simply resolved by asking which item to pick-up (as in generation)
 					prompt = "'" + w.phon + "' is ambiguous, digit your disambiguation choice:\n"
+					options = ""
 					for i, r in enumerate(w.ambiguous):
 						prompt = prompt + "[" + str(i) + "] for " + r + "\n"
+						options += "[" + str(i) + "] "
 					choice = input(prompt)
 					while not check_choice(choice, len(w.ambiguous)):
-						choice = input("Wrong choice. " + prompt)
-					w = self.select(w.ambiguous[int(choice)])
+						choice = input("Wrong choice. Options available: " + options + "\n" + prompt)
+					w = self.mg.select(w.ambiguous[int(choice)])
 					add_ambiguity()
 				set_encoding(w)
 
@@ -82,10 +84,10 @@ class PMG_generate:
 				result = self.mg.merge(cn, w)
 				if result != "OK":
 					print("\t\tMERGE FAILURE: " + result)
-					self.mg.phase_up(cn)
-					while not self.mg.merge(cn, w) == "OK" and not cn.parent:
+					while not self.mg.merge(cn, w) == "OK":
 						print("\t\tPHASE UP: " + cn.phon)
-						self.mg.phase_up(cn)
+						if self.mg.phase_up(cn):
+							break
 				if result == "OK":
 					self.nodes.append(w)
 					self.word = None
@@ -111,6 +113,7 @@ class PMG_generate:
 					print("\t\tFAILED: word [" + w.get_expected() + " " + w.phon + "] cannot be accommodated with the current expectation")
 			else:
 				print("INPUT exhausted")
+				break
 
 		print_offline_measures(self)
 		print_online_measures(self)
