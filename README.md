@@ -25,18 +25,23 @@ Phase-based MGs are an extention of MGs as proposed by Stabler (1997) and variou
 
 Quick Start Guide
 -----------------
-`MG_start.py` is ready to process canonical complex sentences in Italian. A simple lexicon is provided in json format to test the capabilities of the grammar.
-Also a parameterization file (json format) is provided, specifying mandatory agreement categories in Italian and English (unification algorithm to be implemented) 
+To run excecute this file in your Python shell (or run 'Python3 <what follows>' from command line):
 
-`MG_grammar.py` implements the basic Merge, Move and Agree structure building operations.
+e.g. 'PMG_start.py -i "a a a b b b" -l lexicon\PMG_dict_ab.json -p parameters\PMG_param_default.json' 
+  
 
-`MG_generate.py` implements the basic Top-Down structure building algoritm (lexical ambiguity is implemented asking the user to pick up a relevant item among the ones compatible). The procedure is equivalent in Parsing and Generation (this is why v.01 parsing and generation scripts are removed from this release): both in parsing and in generation the input string must be considered feeding the algorithm on a word-by-word pace. Play with ambiguity and knowledge asimmetries between the speaker and the listener to resolve the ambiguity and see the difference in terms of complexity
+`PMG_start.py` gets an input string `-i`, a lexicon file in json format `-l` and a parameter set `-p`. Simple lexica are provided to test the capabilities of the grammar (`PMG_dict_ab.json` implement counting recursion, `PMG_dict_RC.json` simple examples of Relative Clauses in English, `PMG_dict_copular_ita` include some classic example of subectraction from copular sentences etc.).
+Also parameterization files (json format) are provided as example, one default `PMG_param_default.json` with no special parameterization, and two specifying mandatory agreement categories in Italian and English (unification algorithm to be implemented).
+
+`PMG_grammar.py` implements the basic Merge, Move and Agree structure building operations.
+
+`PMG_generate.py` implements the basic Top-Down structure building algoritm (lexical ambiguity is implemented asking the user to pick up a relevant item among the ones compatible). The procedure is equivalent in Parsing and Generation (this is why v.01 parsing and generation scripts are removed from this release): both in parsing and in generation the input string must be considered feeding the algorithm on a word-by-word pace. Play with ambiguity and knowledge asimmetries between the speaker and the listener to resolve the ambiguity and see the difference in terms of complexity
 
 `PMG_complexity_metrics.py` implements the basic set of complexity metrics (both on-line, word-by-word, and off-line; the second should correlate with general acceptability)
 
-`MG_tree.py` implements an useful funzion print_node(MG_done) that print the tree in LATEX-FOREST format as in Kobele et al. 2013, Graf et al. 2017 (this is a compact dependency-like tree)
+`PMG_tree.py` implements an useful funzion print_node(MG_done) that print the tree in LATEX-FOREST format as in Kobele et al. 2013, Graf et al. 2017 (this is a compact dependency-like tree)
 
-`MG_utilities.py` provide other utilities to deal with Nodes search, tree and complexity metrics printing
+`PMG_utilities.py` provide other utilities to deal with Nodes search, tree and complexity metrics printing
 
 Complexity Metrics
 ------------------
