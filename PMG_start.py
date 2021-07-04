@@ -5,42 +5,21 @@ from PMG_generate import *
 
 
 def main(argv):
-	# input_sentence = 'the child likes Mary'
-	# task = "parsing"
-	# lexicon_file = 'PMG_dict_SVO_eng.json'
-	# parameters_file = 'PMG_param_eng.json'
-	# input_sentence = 'quali foto sono la causa'
-	# input_sentence = 'la causa della rivolta pro sono le foto del muro'
-	# lexicon_file = 'PMG_dict_copular_inverse_ita.json'
-	# input_sentence = 'le foto del muro sono la causa della rivolta'
-	# lexicon_file = 'PMG_dict_copular_ita.json'
-	# parameters_file = 'PMG_param_ita.json'
-
-	# input_sentence = 'a a b b'
-	# lexicon_file = 'PMG_dict_ab.json'
-	# parameters_file = 'PMG_param_default.json'
-
 	lexicon_file = 'lexicon/PMG_dict_RC.json'
 	parameters_file = 'parameters/PMG_param_default.json'
 	input_sentence = "I saw the cow that the giraffe kicked"
-	# input_sentence = "I saw the giraffe that kicked the cow"
-	# input_sentence = "the giraffe that the cow kicked smiled"
-
-	input_sentence = "the giraffe that I saw smiled"
 
 	try:
-		opts, args = getopt.getopt(argv, ["input=", "task=", "lexicon_file=", "parameters_file="])
-	except getopt.GetoptError:
-		print('PMG_start.py -i <input sentence (parsing) or category (generation) you want to process> -t <parsing|generation> -l <lexicon_file.json> -p <parameters_file.json>')
-		sys.exit(2)
+		opts, args = getopt.getopt(argv, "i:l:p:", ["input_sentence=", "lexicon_file=", "parameters_file="])
+	except getopt.GetoptError as e:
+		sys.stderr.write("%s %s\n" % (argv[0], e.msg))
+		sys.exit(1)
 	for opt, arg in opts:
 		if opt == '-h':
-			print('PMG_start.py -i <input sentence (parsing) or category (generation) you want to process> -t <parsing|generation> -l <lexicon_file.json> -p <parameters_file.json>')
+			print('PMG_start.py -i <input sentence you want to process> -l <lexicon_file.json> -p <parameters_file.json>')
 			sys.exit()
-		elif opt in ("-i", "--input"):
+		elif opt in ("-i", "--input_sentence"):
 			input_sentence = arg
-		elif opt in ("-t", "--task"):
-			task = arg
 		elif opt in ("-l", "--lexicon_file"):
 			lexicon_file = arg
 		elif opt in ("-p", "--parameters_file"):
