@@ -1,0 +1,128 @@
+{
+	"le":
+        {
+            "label": [{"0":"D"}],
+            "expected": [{"0":"case","1":"D"}],
+            "expect": [{"0":"N"}],
+            "agree": "3.p"
+        },
+    "la":
+        {
+            "label": [{"0":"NP"}],
+            "expected": [{"0":"case","1":"NP"}],
+            "expect": [{"0":"N"}],
+            "agree": "3.p"
+        },
+    "foto":
+        {
+            "label": [{"0":"N"}],
+            "expected": [{"0":"N"}],
+            "expect": [{"0": "P"}],
+            "agree": "3.p"
+        },
+    "muro":
+        {
+            "label": [{"0":"N"}],
+            "expected": [{"0":"N"}],
+            "expect": [{}],
+            "agree": "3.p"
+        },
+    "del":
+        {
+            "label": [{"0":"P", "1":"D"}],
+            "expected": [{"0":"P"}],
+            "expect": [{"0": "N"}],
+            "agree": ""
+        },
+    "della":
+        {
+            "label": [{"0":"P", "1":"D"}],
+            "expected": [{"0":"P"}],
+            "expect": [{"0": "N"}],
+            "agree": ""
+        },
+    "pro":
+        {
+            "label": [{"0":"D"}],
+            "expected": [{"0":"case"}],
+            "expect": [{}],
+            "agree": "3.p"
+        },
+        
+    "causa":
+        {
+            "label": [{"0":"N"}],
+            "expected": [{"0":"N"}],
+            "expect": [{"0":"D","1":"P"}],
+            "agree": ""
+        },
+    "rivolta":
+        {
+            "label": [{"0":"N"}],
+            "expected": [{"0":"N"}],
+            "expect": [{}],
+            "agree": ""
+        },
+    "sono":
+        {
+            "label": [{"0":"T"}],
+            "expected": [{"0":"T"}],
+            "expect": [{"0":"case", "1":"case", "2":"NP"}],
+            "agree": "3.p"
+        },
+    "di_quale":
+        {
+            "label": [{"0":"P"}],
+            "expected": [{"0":"wh", "1":"P"}],
+            "expect": [{"0":"N"}],
+            "agree": ""
+        },
+    "pro":
+        {
+            "label": [{"0":"D"}],
+            "expected": [{"0":"case"}],
+            "expect": [{}],
+            "ambiguous": [{"0":"pro_sg", "1":"pro_pl"}],
+            "agree": "3.p"
+        },
+    "pro_sg":
+        {
+            "label": [{"0":"D"}],
+            "expected": [{"0":"case"}],
+            "expect": [{}],
+            "doubling": "True",
+            "ref": [{"0":"D"}],
+            "agree": "3.s"
+        },
+    "pro_pl":
+        {
+            "label": [{"0":"D"}],
+            "expected": [{"0":"case"}],
+            "expect": [{}],
+            "ref": [{"0":"D"}],
+            "doubling": "True",
+            "agree": "3.p"
+        },
+    "ROOT":
+        {
+            "label": [{"0":"C"}],
+            "expected": [{"0":"C"}],
+            "expect": [{"0":"T"}],
+            "ambiguous": [{"0":"ROOT_decl", "1":"ROOT_int"}],
+            "agree": "3.p"
+        },
+    "ROOT_decl":
+        {
+            "label": [{"0":"C"}],
+            "expected": [{"0":"C"}],
+            "expect": [{"0":"T"}],
+            "agree": ""
+        },
+    "ROOT_int":
+        {
+            "label": [{"0":"C"}],
+            "expected": [{"0":"C"}],
+            "expect": [{"0":"wh", "1":"T"}],
+            "agree": ""
+        }
+}

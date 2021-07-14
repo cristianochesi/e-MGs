@@ -1,0 +1,60 @@
+{
+    "a":
+        {
+            "label": [{}],
+            "expected": [{}],
+            "expect": [{}],
+            "ambiguous": [{"0":"a_simple","1":"a_recursive"}],
+            "agree": ""
+        },
+
+    "a_simple":
+        {
+            "label": [{"0":"A"}],
+            "expected": [{"0":"A"}],
+            "expect": [{"0":"B"}],
+            "agree": ""
+        },
+
+    "a_recursive":
+        {
+            "label": [{"0":"A"}],
+            "expected": [{"0":"A"}],
+            "expect": [{"0":"A","01":"B"}],
+            "agree": ""
+        },
+
+    "b":
+        {
+            "label": [{"0":"B"}],
+            "expected": [{"0":"B"}],
+            "expect": [{}],
+            "agree": ""
+        },
+
+    "ROOT":
+        {
+            "label": [{"0":"ROOT"}],
+            "expected": [{}],
+			"expect": [{}],
+            "ambiguous": [{"0":"ROOT_A","1":"ROOT_B"}],
+			"agree":""
+        },
+
+    "ROOT_A":
+        {
+            "label": [{"0":"ROOT"}],
+            "expected": [{}],
+			"expect": [{"0":"A"}],
+			"agree":""
+        },
+
+    "ROOT_B":
+        {
+            "label": [{"0":"ROOT"}],
+            "expected": [{}],
+			"expect": [{"0":"B"}],
+			"agree":""
+        }
+
+}

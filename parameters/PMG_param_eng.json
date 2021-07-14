@@ -1,8 +1,0 @@
-{
-    "Agreement":
-        {
-            "expected": [{"0":"T"}],
-            "expect": [{}],
-            "default": "3.s"
-        }
-}

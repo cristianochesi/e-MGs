@@ -1,0 +1,21 @@
+{
+    "Agreement":
+        {
+            "expected": [{"0":"T", "1":"V.past.part", "2":"D", "3":"A", "3":"N"}],
+            "expect": [{}],
+            "limits": [{}],
+            "default": "3.s"
+        },
+    "Pro_drop":
+        {
+            "expected": [{"0":"T"}],
+            "expect": [{}],
+            "default": "pro"
+        },
+    "Late_expansion":
+        {
+            "expected": [{"0":"N"}],
+            "expect": [{}],
+            "default": "True"
+        }
+}

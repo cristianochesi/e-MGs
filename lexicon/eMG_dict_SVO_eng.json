@@ -1,0 +1,50 @@
+{
+    "John":
+        {
+            "label": [{"0":"D","1":"N"}],
+            "expected": [{"0":"case", "1":"D"}],
+            "expect": [{}],
+            "agree": "3.s"
+        },
+
+    "the":
+        {
+            "label": [{"0":"D"}],
+            "expected": [{"0":"case", "1":"D"}],
+            "expect": [{"0":"N"}],
+            "agree": "3.s"
+        },
+
+    "child":
+        {
+            "label": [{"0":"N"}],
+            "expected": [{"0":"N"}],
+            "expect": [{}],
+            "agree": "3.s"
+        },
+		
+    "Mary":
+        {
+            "label": [{"0":"D","1":"N"}],
+            "expected": [{"0":"case", "1":"D"}],
+            "expect": [{}],
+            "agree": "3.s"
+        },
+
+    "likes":
+        {
+            "label": [{"0":"T","1":"V"}],
+            "expected": [{"0":"T"}],
+            "expect": [{"1":"D", "2":"case", "3":"D"}],
+            "agree": "3.s"
+        },
+
+    "ROOT":
+        {
+            "label": [{"0":"TP"}],
+            "expected": [{}],
+			"expect": [{"0":"case", "1":"T"}],
+			"agree":""
+        }
+
+}
