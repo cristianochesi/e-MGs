@@ -4,19 +4,19 @@ Expectation-based Minimalist Grammars (v 1.0)
 
 This is a simple Python3 implementation of the expectation-based Minimalist Grammars (e-MGs) discussed in Chesi 2021.
 E-MGs are greatly indebted with MGs (Stabler 1997) and PMGs (Chesi 2007, 2017) formalisms.
-This implementation includes: a grammar definition, a unified parsing/generation interactive procedure, a set of parameterizations and lexica dealing with specific formal (e.g. counting recursion) and linguistic facts (copular constructions in Italian, relative clauses in English, Greenberg's Universal 20 re-ordering etc.), few simple complexity metrics both producing on-line (word-by-word) encoding integration and retrieval costs and off-line (global) costs.
+This implementation includes: a grammar definition, a unified parsing/generation interactive procedure, a set of parameterizations and lexica dealing with specific formal (e.g., counting recursion) and linguistic facts (copular constructions in Italian, relative clauses in English, Greenberg's Universal 20 re-ordering etc.), few simple complexity metrics both producing on-line (word-by-word) encoding integration and retrieval costs and off-line (global) costs.
 
 
 Background
 ----------
 
-e-MGs are simplifications of both MGs Stabler (1997) and PMGs (Chesi 2007, 2017) and variously re-defined in various works
+e-MGs are simplifications of both MGs Stabler (1997) and PMGs (Chesi 2007, 2017).
 In a nutshell, Merge is expectation-based, that is, each category (X) must be selected by a superordinate node with the relevant expectation associated to it in the lexicon (=X).
 This simple mechanism is sufficient to dispense the grammar from probe-goals/licensee-licensors features to deal with non-local dependencies:
-Items with unexpected categories simply get moved in the Memory-buffer of the superordinate node and transmitted to sequential phases (i.e. last-selected expectations).
+Items with unexpected categories simply get moved in the Memory-buffer of the superordinate node and transmitted to sequential phases (i.e., last-selected expectations).
 Items selected while the superordinate node has other selection features qualifies as "nested phases" and cannot receive any pending item (unless they become sequential at some point of the derivation and "late expansion" of selection is permitted by parsing parameterization).
 
-The off-line complexity metrics are simple translations of the one proposed in Gerth 2017, Graf et al 2017, Kobele 2013 and used in various works (e.g. De Santo 2019).
+The off-line complexity metrics are simple translations of the one proposed in Gerth 2017, Graf et al 2017, Kobele 2013 and used in various works (e.g., De Santo 2019).
 On-line metrics are simplified versions of the metrics discussed in Chesi & Canal 2019.
 
 - Bianchi Valentina, Cristiano Chesi (2006): [Phases, Left Branch Islands, and Computational Nesting](https://repository.upenn.edu/pwpl/vol12/iss1/3/)
@@ -35,11 +35,27 @@ On-line metrics are simplified versions of the metrics discussed in Chesi & Cana
 
 Quick Start Guide
 -----------------
-To run excecute this file in your Python shell (or run 'Python3 <what follows>' from command line):
+To run the "generate" procedure, execute this file in your Python shell (or run `Python3 <what follows>` or `Python <what follows>` from command line):
 
 e.g. `eMG_start.py -i "a a a b b b" -l lexicon\PMG_dict_ab.json -p parameters\PMG_param_default.json` 
   (notice that ambiguity must be resolved in-line)
-  
+
+Few examples to test specific constructions.
+- Canonical copular constructions (Italian lexicon):
+
+`eMG_start.py -i "le foto del muro sono la causa della rivolta" -l lexicon\PMG_dict_copular_ita.json -p parameters\PMG_param_ita.json`
+- Inverse copular constructions (Italian lexicon), change the -i option above with:
+
+`-i "la causa della rivolta sono le foto del muro"`
+- Subject Relative (English lexicon):
+
+`eMG_start.py -i "I saw the giraffe that kicked the cow" -l lexicon\eMG_dict_RC.json -p parameters\eMG_param_default.json`
+- Object Relative, change the -i option above with:
+
+`-i "I saw the giraffe that the cow kicked"`
+- Object Relative + embedding, change the -i option above with:
+
+`-i "the giraffe that the cow kicked smiled"`
 
 `eMG_start.py` gets an input string `-i`, a lexicon file in json format `-l` and a parameter set `-p`. Simple lexica are provided to test the capabilities of the grammar (`PMG_dict_ab.json` implement counting recursion, `PMG_dict_RC.json` simple examples of Relative Clauses in English, `PMG_dict_copular_ita` include some classic example of subectraction from copular sentences etc.).
 Also parameterization files (json format) are provided as example, one default `PMG_param_default.json` with no special parameterization, and two specifying mandatory agreement categories in Italian and English (unification algorithm to be implemented).
@@ -63,5 +79,5 @@ FIXME
 ------------------
 - lexicon should be implemented using TRIE-like structure (Chesi 2019, Stabler 2013)
 - memory structure should be implemented using TRIE-like structure <- blocking RelM full measure implementation
-- Constituency tree must be created by (deep)copying nodes: features are destroyed when succesfull structure building operations apply, then in this format the node is a bit "flat" and dependency-like (index tell us in which order the items are placed)
-- parameterization must be fully expanded (antilocality, late expansion, pied-piping and expectation stacking, see Chesi & Brattico 2018)
+- Constituency tree must be created by (deep)copying nodes: features are destroyed when successful structure building operations apply, then in this format the node is a bit "flat" and dependency-like (index tell us in which order the items are placed)
+- parameterization must be fully expanded (anti-locality, pied-piping and expectation stacking, see Chesi & Brattico 2018)
