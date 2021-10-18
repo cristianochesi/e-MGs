@@ -60,24 +60,24 @@ Few examples to test specific constructions.
 `eMG_start.py` gets an input string `-i`, a lexicon file in json format `-l` and a parameter set `-p`. Simple lexica are provided to test the capabilities of the grammar (`PMG_dict_ab.json` implement counting recursion, `PMG_dict_RC.json` simple examples of Relative Clauses in English, `PMG_dict_copular_ita` include some classic example of subectraction from copular sentences etc.).
 Also parameterization files (json format) are provided as example, one default `PMG_param_default.json` with no special parameterization, and two specifying mandatory agreement categories in Italian and English (unification algorithm to be implemented).
 
-`eMG_grammar.py` implements the basic Merge, Move and Agree structure building operations.
+`eMG_grammar.py` implements the basic Merge, Move and Agree structure building operations as well as the Select function (lexical retrieval).
 
-`eMG_generate.py` implements the basic Top-Down structure building algoritm (lexical ambiguity is implemented asking the user to pick up a relevant item among the ones compatible). The procedure is equivalent in Parsing and Generation (this is why v.01 parsing and generation scripts are removed from this release): both in parsing and in generation the input string must be considered feeding the algorithm on a word-by-word pace. Play with ambiguity and knowledge asimmetries between the speaker and the listener to resolve the ambiguity and see the difference in terms of complexity
+`eMG_generate.py` implements the basic Top-Down structure building algorithm (lexical ambiguity is resolved by asking the user to pick up a relevant item among the ones compatible). The procedure is equivalent in Parsing and Generation: both in parsing and in generation the input string must be considered feeding the algorithm on a word-by-word pace. Play with ambiguity and knowledge asymmetries between the speaker and the listener to resolve the ambiguity and see the difference in terms of complexity
 
-`eMG_complexity_metrics.py` implements the basic set of complexity metrics (both on-line, word-by-word, and off-line; the second should correlate with general acceptability)
+`eMG_complexity_metrics.py` implements the basic set of complexity metrics (both on-line - word-by-word - and off-line - possible correlation to general acceptability/grammaticality)
 
-`eMG_tree.py` implements an useful funzion print_node(MG_done) that print the tree in LATEX-FOREST format as in Kobele et al. 2013, Graf et al. 2017 (this is a compact dependency-like tree)
+`eMG_tree.py` implements a useful function print_node(MG_done) that prints the tree in LATEX-FOREST format as in Kobele et al. 2013, Graf et al. 2017 (this is a compact dependency-like tree)
 
-`eMG_utilities.py` provide other utilities to deal with Nodes search, tree and complexity metrics printing
+`eMG_utilities.py` provide utilities to deal with Nodes search, tree and complexity metrics printing
 
 Complexity Metrics
 ------------------
 Basic complexity Metrics inspired by Graf et al. 2017, Kobele et al. 2013 included (MaxT, SumT, SumS). 
-Other information provided by the parser are the total number of operations used to build the final structure, the categorial GRAMMATICA/UNGRAMMATICAL prediction (based on failure in agreement, unfulfilled expectations or items pending in memory at the end of the derivation) and a Relativized Minimality complexity estimation (RelM) based on feature sharing while elements are stored in memory and their difficulty at retieval (Chesi & Canal 2019).
+Other information provided by the parser are the total number of operations used to build the final structure, the categorial GRAMMATICAL/UNGRAMMATICAL prediction (based on failure in agreement, unfulfilled expectations or items pending in memory at the end of the derivation) and a Relativized Minimality complexity estimation (RelM) based on feature sharing while elements are stored in memory and their difficulty at retieval (see FREC in Chesi & Canal 2019).
 
 FIXME
 ------------------
 - lexicon should be implemented using TRIE-like structure (Chesi 2019, Stabler 2013)
-- memory structure should be implemented using TRIE-like structure <- blocking RelM full measure implementation
-- Constituency tree must be created by (deep)copying nodes: features are destroyed when successful structure building operations apply, then in this format the node is a bit "flat" and dependency-like (index tell us in which order the items are placed)
-- parameterization must be fully expanded (anti-locality, pied-piping and expectation stacking, see Chesi & Brattico 2018)
+- memory structure should be implemented using TRIE-like structure <- better RelM full measure implementation
+- Constituency tree must be created by (deep)copying nodes: features are destroyed when successful structure building operations apply, then, in this format, the structure appears to be a bit too "flat" and dependency-like (indexes however unambiguously tell us in which order the items are processed)
+- parameterization should be expanded (anti-locality, pied-piping and expectation stacking, see Chesi & Brattico 2018)

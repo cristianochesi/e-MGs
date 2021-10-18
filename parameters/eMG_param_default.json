@@ -3,6 +3,7 @@
         {
             "expected": [{}],
             "expect": [{}],
+            "cued_agree": [{}],
             "default": ""
         },
     "Late_expansion":

@@ -1,4 +1,5 @@
 import eMG_node
+import math
 
 maxD = 0
 maxT = 0
@@ -44,6 +45,25 @@ def get_ambiguities() -> int:
 	return ambiguities
 
 
+def get_retrieval_cost(nodes, word):
+	retrieval = 0
+	for n in range(0, len(nodes)):
+		if nodes[n].phon == word:
+			if len(nodes[n].children) >= 1:
+				for child in nodes[n].children:
+					if child.phon.startswith("$t"):
+						retrieval += round(math.log(child.mem_outdex - child.mem_index), 2)
+	return retrieval
+
+
+def get_intervention_cost(nodes, word):
+	intervention = 0
+	for n in range(0, len(nodes)):
+		if nodes[n].phon == word:
+			intervention += nodes[n].retrieval
+	return intervention
+
+
 def set_MaxT(node: eMG_node):
 	global maxT
 	t = node.outdex - node.index
@@ -71,34 +91,33 @@ def set_MaxD(node: eMG_node):
 		maxD = node.nesting_level
 
 
-def set_RelM(node: eMG_node):
+def set_AgreeMismatch(node: eMG_node):
+	print("\t\tAgreement mismatch penalty considered for encoding (+1) at node '" + node.phon + "'")
+	node.encoding += 1
+
+
+def set_FRC(node: eMG_node):  # minimal implementation of Chesi (2017) Feature Retrieval Cost (FRC); only top-most accessible features are considered (e.g. D-related features instead of D and N related features as in Chesi & Canal 2019)
 	global relM
-	set_retrieval(node)
-	expected = ""
-	if len(node.mem) > 1:
-		for n in node.mem:
-			if not expected:
-				expected = n.get_expected()
-			else:
-				if expected == n.get_expected():
-					relM += 1
+	if len(node.mem) >= 1:
+		dF = cued_features(node.mem[0], node)
+		nF = shared_features(node)
+		rM = round(pow(1 + nF, len(node.mem)) / (1 + dF), 2)
+		if node.retrieval == 0:
+			node.retrieval = 1
+		node.retrieval *= rM
+	print("\t\tFRC calculated: dF=" + str(dF) + " nF=" + str(nF) + " FRC= " + str(rM))
+	if rM > relM:
+		relM = rM
 
 
 def set_encoding(node: eMG_node):
 	for label in node.label:
 		if label == "N" or label == "V":
-			node.encoding = 1
+			node.encoding += 1
 
 
-def set_retrieval(node: eMG_node):
-	expected = ""
-	if len(node.mem) > 1:
-		for n in node.mem:
-			if not expected:
-				expected = n.get_expected()
-			else:
-				if expected == n.get_expected():
-					node.retrieval = 1
+def add_encoding_penalty(node: eMG_node):
+	node.encoding += 1
 
 
 def add_move_failure():
@@ -109,3 +128,36 @@ def add_move_failure():
 def add_ambiguity():
 	global ambiguities
 	ambiguities += 1
+
+
+def cued_features(retrieved: eMG_node, retrieving: eMG_node):
+	cF = 0
+	if retrieved.get_expect() == retrieving.get_expect():
+		cF = 1
+	agreeF = retrieving.agree.split(".")
+	agreedF = retrieved.agree.split(".")
+	for x in agreeF:
+		for y in agreedF:
+			if x == y:
+				cF += 1
+	return cF
+
+
+def shared_features(retrieving: eMG_node):
+	nF = 0
+	i = 0
+	items = []
+	for m in retrieving.mem:
+		if i > 0:
+			items.append(m)
+		i += 1
+	for n in items:
+		if retrieving.get_expect() == n.get_expect():
+			nF = 1
+		agreeF = retrieving.agree.split(".")
+		agreedF = n.agree.split(".")
+		for x in agreeF:
+			for y in agreedF:
+				if x == y:
+					nF += 1
+	return nF

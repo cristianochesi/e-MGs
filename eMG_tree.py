@@ -25,7 +25,7 @@ class PMG_tree:
 			if node.in_mem:
 				if not self.movement == "":
 					self.new_line = "\n"
-				self.movement = self.movement + self.new_line + "\\draw[move = {canonical}] (" + str(node.mem_index) + ") to[out = west, in =south west] (" + str(node.mem_outdex) + ");"
+				self.movement = self.movement + self.new_line + "\\draw[move = {canonical}] (" + str(node.mem_index) + ") to[out = south west, in = south west] (" + str(node.mem_outdex) + ");"
 		if node.is_last_child():
 			self.indent = self.indent[1:]
 

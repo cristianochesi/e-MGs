@@ -1,14 +1,21 @@
 {
+    "ROOT":
+        {
+            "label": [{"0":"ROOT"}],
+            "expected": [{}],
+			"expect": [{"0":"A"}],
+			"agree":""
+        },
     "a":
         {
             "label": [{}],
             "expected": [{}],
             "expect": [{}],
-            "ambiguous": [{"0":"a_simple","1":"a_recursive"}],
+            "ambiguous": [{"0":"a_s","1":"a_r"}],
             "agree": ""
         },
 
-    "a_simple":
+    "a_s":
         {
             "label": [{"0":"A"}],
             "expected": [{"0":"A"}],
@@ -16,11 +23,11 @@
             "agree": ""
         },
 
-    "a_recursive":
+    "a_r":
         {
             "label": [{"0":"A"}],
             "expected": [{"0":"A"}],
-            "expect": [{"0":"A","01":"B"}],
+            "expect": [{"0":"A","1":"B"}],
             "agree": ""
         },
 
@@ -30,31 +37,5 @@
             "expected": [{"0":"B"}],
             "expect": [{}],
             "agree": ""
-        },
-
-    "ROOT":
-        {
-            "label": [{"0":"ROOT"}],
-            "expected": [{}],
-			"expect": [{}],
-            "ambiguous": [{"0":"ROOT_A","1":"ROOT_B"}],
-			"agree":""
-        },
-
-    "ROOT_A":
-        {
-            "label": [{"0":"ROOT"}],
-            "expected": [{}],
-			"expect": [{"0":"A"}],
-			"agree":""
-        },
-
-    "ROOT_B":
-        {
-            "label": [{"0":"ROOT"}],
-            "expected": [{}],
-			"expect": [{"0":"B"}],
-			"agree":""
         }
-
 }
