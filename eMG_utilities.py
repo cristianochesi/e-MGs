@@ -1,5 +1,5 @@
 import copy
-import math
+import re
 from eMG_complexity_metrics import *
 
 
@@ -16,6 +16,7 @@ def print_offline_measures(t):
 		print("Prediction: GRAMMATICAL")
 	else:
 		print("Prediction: UNGRAMMATICAL")
+	print("Merge unexpected items: " + str(t.mg.merge_unexpected))
 	print("Move failures: " + str(get_move_failures()))
 	print("Ambiguities: " + str(get_MaxD()))
 	print("MaxD: " + str(get_MaxD()))
@@ -49,6 +50,10 @@ def print_online_measures(t):
 	nodes = copy.deepcopy(t.nodes)
 	for word in words:
 		print(str(get_retrieval_cost(nodes, word)) + "\t", end='')
+	print("\nINTERVENTION:\t", end='')
+	nodes = copy.deepcopy(t.nodes)
+	for word in words:
+		print(str(get_intervention_cost(nodes, word)) + "\t", end='')
 
 
 def find_word(nodes, word):
@@ -69,8 +74,16 @@ def get_retrieval_cost(nodes, word):
 				for child in nodes[n].children:
 					if child.phon.startswith("$t"):
 						# print(child.phon + ": " + str(child.mem_outdex) + " - " + str(child.mem_index))
-						retrieval += round(math.log(child.mem_outdex - child.mem_index)*len(nodes[n].children), 2)
+						retrieval += round(math.log(child.mem_outdex - child.mem_index), 2)
 	return retrieval
+
+
+def get_intervention_cost(nodes, word):
+	intervention = 0
+	for n in range(0, len(nodes)):
+		if nodes[n].phon == word:
+			intervention += nodes[n].retrieval
+	return intervention
 
 
 def print_tree(t):

@@ -2,7 +2,32 @@
     "Agreement":
         {
             "expected": [{"0":"T"}],
-            "expect": [{}],
+            "expecting": [{"0":"case"}],
+            "cued_agree": [{"0":"Y.Y.N"}],
             "default": "3.s"
+        },
+     "Late_expansion":
+        {
+            "expected": [{}],
+            "expect": [{}],
+            "default": "yes"
+        },
+    "Pied_piping":
+        {
+            "expected": [{}],
+            "expect": [{}],
+            "default": "no"
+        },
+    "Pro_drop":
+        {
+            "expected": [{}],
+            "expect": [{}],
+            "default": "no"
+        },
+    "Topic_drop":
+        {
+            "expected": [{}],
+            "expect": [{}],
+            "default": "no"
         }
 }

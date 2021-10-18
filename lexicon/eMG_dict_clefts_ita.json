@@ -1,0 +1,146 @@
+ {
+	"i":
+        {
+            "label": [{"0":"D"}],
+            "expected": [{"0":"case","1":"D"}],
+            "expect": [{"0":"N"}],
+            "agree": "p.m"
+        },
+    "il":
+        {
+            "label": [{"0":"DP"}],
+            "expected": [{"0":"case","1":"D"}],
+            "expect": [{"0":"N"}],
+            "agree": "s.m"
+        },
+     "al":
+        {
+            "label": [{"0":"PP"}],
+            "expected": [{}],
+            "expect": [{"0":"N"}],
+            "agree": "s.m"
+        },
+     "poliziotto":
+        {
+            "label": [{"0":"N"}],
+            "expected": [{"0":"N"}],
+            "expect": [{}],
+            "agree": "s.m"
+        },
+    "poliziotti":
+        {
+            "label": [{"0":"N"}],
+            "expected": [{"0":"N"}],
+            "expect": [{}],
+            "agree": "p.m"
+        },
+    "ladro":
+        {
+            "label": [{"0":"N"}],
+            "expected": [{"0":"N"}],
+            "expect": [{}],
+            "agree": "s.m"
+        },
+    "ladri":
+        {
+            "label": [{"0":"N"}],
+            "expected": [{"0":"N"}],
+            "expect": [{}],
+            "agree": "p.m"
+        },
+     "voi":
+        {
+            "label": [{"0":"D"}],
+            "expected": [{"0":"case","1":"D"}],
+            "expect": [{"0":"N"}],
+            "agree": "2.p"
+        },
+     "noi":
+        {
+            "label": [{"0":"D"}],
+            "expected": [{"0":"case","1":"D"}],
+            "expect": [{"0":"N"}],
+            "agree": "1.p"
+        },
+    "bar":
+        {
+            "label": [{"0":"N"}],
+            "expected": [{"0":"N"}],
+            "expect": [{}],
+            "agree": "s.m"
+        },
+    "sono":
+        {
+            "label": [{"0":"T"}],
+            "expected": [{"0":"T"}],
+            "expect": [{"0":"case", "1":"RC"}],
+            "agree": "p"
+        },
+     "siete":
+        {
+            "label": [{"0":"T"}],
+            "expected": [{"0":"T"}],
+            "expect": [{"0":"case", "1":"RC"}],
+            "agree": "2.p"
+        },
+     "siamo":
+        {
+            "label": [{"0":"T"}],
+            "expected": [{"0":"T"}],
+            "expect": [{"0":"case", "1":"RC"}],
+            "agree": "1.p"
+        },
+    "riconosce":
+        {
+            "label": [{"0":"T", "1":"V"}],
+            "expected": [{"0":"T"}],
+            "expect": [{"0":"case", "1":"D", "2":"case", "3":"D"}],
+            "agree": "s",
+            "valued": 0
+        },
+     "riconoscono":
+        {
+            "label": [{"0":"T", "1":"V"}],
+            "expected": [{"0":"T"}],
+            "expect": [{"0":"case", "1":"D", "2":"case", "3":"D"}],
+            "agree": "p",
+            "valued": 0
+        },
+     "riconosciamo":
+        {
+            "label": [{"0":"T", "1":"V"}],
+            "expected": [{"0":"T"}],
+            "expect": [{"0":"case", "1":"D", "2":"case", "3":"D"}],
+            "agree": "1.p",
+            "valued": 0
+        },
+     "riconoscete":
+        {
+            "label": [{"0":"T", "1":"V"}],
+            "expected": [{"0":"T"}],
+            "expect": [{"0":"case", "1":"D", "2":"case", "3":"D"}],
+            "agree": "2.p",
+            "valued": 0
+        },
+    "che":
+        {
+            "label": [{"0":"RC"}],
+            "expected": [{"0":"RC"}],
+            "expect": [{"0":"T"}],
+            "agree": ""
+        },
+     "pro":
+        {
+            "label": [{"0":"D"}],
+            "expected": [{"0":"case"}],
+            "expect": [{}],
+            "agree": ""
+        },
+    "ROOT":
+        {
+            "label": [{"0":"C"}],
+            "expected": [{"0":"C"}],
+            "expect": [{"0":"T"}],
+            "agree": ""
+        }
+}

@@ -26,6 +26,7 @@ class PMG_node:
 		self.mem = []
 		self.ref = ""
 		self.in_mem = False
+		self.valued = True
 		self.encoding = 0
 		self.retrieval = 0
 
@@ -121,6 +122,7 @@ class PMG_node:
 	def delay_expect(self):
 		if len(self.expect) > 1:
 			pop = self.expect.pop(0)
+			print("APPEND POP")
 			self.get_parent_in_mem().mem.append(pop)
 
 	def get_expected(self):

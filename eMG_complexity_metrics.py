@@ -1,4 +1,5 @@
 import eMG_node
+import math
 
 maxD = 0
 maxT = 0
@@ -71,34 +72,21 @@ def set_MaxD(node: eMG_node):
 		maxD = node.nesting_level
 
 
-def set_RelM(node: eMG_node):
+def set_FRC(node: eMG_node):  # Chesi (2017): Feature Retrieval Cost (FRC)
 	global relM
-	set_retrieval(node)
-	expected = ""
-	if len(node.mem) > 1:
-		for n in node.mem:
-			if not expected:
-				expected = n.get_expected()
-			else:
-				if expected == n.get_expected():
-					relM += 1
+	if len(node.mem) >= 1:
+		dF = cued_features(node.mem[0], node)
+		nF = shared_features(node)
+		rM = round(pow(1 + nF, len(node.mem)) / (1 + dF), 2)
+		node.retrieval = node.retrieval+rM
+	if rM > relM:
+		relM = rM
 
 
 def set_encoding(node: eMG_node):
 	for label in node.label:
 		if label == "N" or label == "V":
 			node.encoding = 1
-
-
-def set_retrieval(node: eMG_node):
-	expected = ""
-	if len(node.mem) > 1:
-		for n in node.mem:
-			if not expected:
-				expected = n.get_expected()
-			else:
-				if expected == n.get_expected():
-					node.retrieval = 1
 
 
 def add_move_failure():
@@ -109,3 +97,36 @@ def add_move_failure():
 def add_ambiguity():
 	global ambiguities
 	ambiguities += 1
+
+
+def cued_features(retrieved: eMG_node, retrieving: eMG_node):
+	cF = 0;
+	if retrieved.get_expect() == retrieving.get_expect():
+		cF = 1;
+	agreeF = retrieving.agree.split(".")
+	agreedF = retrieved.agree.split(".")
+	for x in agreeF:
+		for y in agreedF:
+			if x == y:
+				cF += 1;
+	return cF
+
+
+def shared_features(retrieving: eMG_node):
+	nF = 0
+	i = 0
+	items = []
+	for m in retrieving.mem:
+		if i > 0:
+			items.append(m)
+		i += 1
+	for n in items:
+		if retrieving.get_expect() == n.get_expect():
+			nF = 1;
+		agreeF = retrieving.agree.split(".")
+		agreedF = n.agree.split(".")
+		for x in agreeF:
+			for y in agreedF:
+				if x == y:
+					nF += 1;
+	return nF

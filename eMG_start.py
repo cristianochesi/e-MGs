@@ -68,6 +68,14 @@ def get_param(param_file) -> {}:
 		agree_cats.insert(n, params['Agreement']['expected'][0][x])
 		n += 1
 	n = 0
+	for x in params['Agreement']['expected'][0]:
+		agree_cats.insert(n, params['Agreement']['expected'][0][x])
+		n += 1
+	n = 0
+	for x in params['Agreement']['cued_agree'][0]:
+		agree_cats.insert(n, params['Agreement']['cued_agree'][0][x])
+		n += 1
+	n = 0
 	for x in params['Late_expansion']['expected'][0]:
 		late_expand.insert(n, params['Late_expansion']['expected'][0][x])
 		n += 1

@@ -2,8 +2,8 @@
     "Agreement":
         {
             "expected": [{"0":"T", "1":"V.past.part", "2":"D", "3":"A", "3":"N"}],
-            "expect": [{}],
-            "limits": [{}],
+            "expecting": [{"0":"case", "1":"D", "2":"N", "3":"N"}],
+            "cued_agree": [{"0":"Y.Y.N", "1":"N.Y.Y", "2":"N.Y.Y", "3":"N.Y.Y"}],
             "default": "3.s"
         },
     "Pro_drop":
