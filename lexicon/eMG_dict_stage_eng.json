@@ -1,0 +1,81 @@
+{
+	"there":
+        {
+            "label": [{"0":"D"}],
+            "expected": [{"0":"case"}],
+            "expect": [{}],
+            "ambiguous": [{"0":"there_sg", "1":"there_pl"}],
+            "agree": ""
+        },
+    "there_sg":
+        {
+            "label": [{"0":"D"}],
+            "expected": [{"0":"case"}],
+            "expect": [{}],
+            "agree": "3.s"
+        },
+    "there_pl":
+        {
+            "label": [{"0":"D"}],
+            "expected": [{"0":"case"}],
+            "expect": [{}],
+            "agree": "3.p"
+        },
+      "firemen":
+        {
+            "label": [{"0":"D"}],
+            "expected": [{"0":"D"}],
+            "expect": [{}],
+            "ambiguous": [{"0":"firemen_D", "1":"firemen_N"}],
+            "agree": "3.p"
+        },
+    "firemen_N":
+        {
+            "label": [{"0":"N"}],
+            "expected": [{"0":"N"}],
+            "expect": [{}],
+            "agree": "3.p"
+        },
+    "firemen_D":
+        {
+            "label": [{"0":"D"}],
+            "expected": [{"0":"D"}],
+            "expect": [{}],
+            "agree": "3.p"
+        },
+    "available":
+        {
+            "label": [{"0":"A"}],
+            "expected": [{"0":"pred"}],
+            "expect": [{"0":"D"}],
+            "agree": ""
+        },
+    "altruistic":
+        {
+            "label": [{"0":"A"}],
+            "expected": [{"0":"pred"}],
+            "expect": [{"0":"D"}],
+            "agree": ""
+        },
+    "is":
+        {
+            "label": [{"0":"T"}],
+            "expected": [{"0":"T"}],
+            "expect": [{"0":"case", "1":"pred"}],
+            "agree": "3.s"
+        },
+    "are":
+        {
+            "label": [{"0":"T"}],
+            "expected": [{"0":"T"}],
+            "expect": [{"0":"case", "1":"pred"}],
+            "agree": "3.p"
+        },
+    "ROOT":
+        {
+            "label": [{"0":"C"}],
+            "expected": [{"0":"C"}],
+            "expect": [{"0":"T"}],
+            "agree": ""
+        }
+}

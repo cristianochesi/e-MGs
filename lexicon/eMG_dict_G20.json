@@ -1,0 +1,7 @@
+{
+    "ROOT": {"label": [{"0":"ROOT"}], "expected": [{}], "expect": [{"0":"Dem"}], "agree":""},
+    "1": {"label": [{"0":"Dem"}], "expected": [{"0":"Dem"}], "expect": [{"0":"Num"}], "agree": ""},
+    "2": {"label": [{"0":"Num"}], "expected": [{"0":"Num"}], "expect": [{"0":"A"}], "agree": ""},
+    "3": {"label": [{"0":"A"}], "expected": [{"0":"A"}], "expect": [{"0":"N"}], "agree": ""},
+    "4": {"label": [{"0":"N"}], "expected": [{"0":"N"}], "expect": [{}], "agree": ""}
+}

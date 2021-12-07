@@ -6,25 +6,28 @@ from eMG_generate import *
 agree_cats = []
 late_expand = []
 late_expand_default = False
+sinking = False
 
 
 def main(argv):
 	global agree_cats
 	global late_expand
 	global late_expand_default
+	global sinking
 
 	lexicon_file = 'lexicon/eMG_dict_RC.json'
 	parameters_file = 'parameters/eMG_param_default.json'
 	input_sentence = "I saw the cow that the giraffe kicked"
+	verbose = True
 
 	try:
-		opts, args = getopt.getopt(argv, "i:l:p:", ["input_sentence=", "lexicon_file=", "parameters_file="])
+		opts, args = getopt.getopt(argv, "i:l:p:v:", ["input_sentence=", "lexicon_file=", "parameters_file=", "verbose="])
 	except getopt.GetoptError as e:
 		sys.stderr.write("%s %s\n" % (argv[0], e.msg))
 		sys.exit(1)
 	for opt, arg in opts:
 		if opt == '-h':
-			print('eMG_start.py -i <input sentence you want to process> -l <lexicon_file.json> -p <parameters_file.json>')
+			print('eMG_run.py -i <input sentence you want to process> -l <lexicon_file.json> -p <parameters_file.json>')
 			sys.exit()
 		elif opt in ("-i", "--input_sentence"):
 			input_sentence = arg
@@ -32,10 +35,13 @@ def main(argv):
 			lexicon_file = arg
 		elif opt in ("-p", "--parameters_file"):
 			parameters_file = arg
+		elif opt in ("-v", "--verbose"):
+			verbose = arg
 
 	print('Input: "' + input_sentence + '"')
 	print('Lexicon file: ', lexicon_file)
 	print('Parameter file: ', parameters_file)
+	print('Verbose: ', verbose)
 
 	g = PMG_generate(lexicon_file)
 	root = g.mg.select("ROOT")
@@ -52,6 +58,7 @@ def main(argv):
 	g.mg.set_param_agree(agree_cats)
 	g.mg.set_late_expansion(late_expand)
 	g.mg.late_expansion_default = late_expand_default
+	g.mg.sinking = sinking
 	g.sentence = input_sentence
 	g.generate(input_sentence.split())
 
@@ -60,6 +67,7 @@ def get_param(param_file) -> {}:
 	global agree_cats
 	global late_expand
 	global late_expand_default
+	global sinking
 
 	with open(param_file) as json_file:
 		params = json.load(json_file)
@@ -80,6 +88,7 @@ def get_param(param_file) -> {}:
 		late_expand.insert(n, params['Late_expansion']['expected'][0][x])
 		n += 1
 	late_expand_default = bool(params['Late_expansion']['default'])
+	sinking = bool(params['Sinking']['default'])
 
 
 if __name__ == "__main__":

@@ -76,7 +76,7 @@ class PMG_generate:
 				self.word = words.pop(0)
 				self.step += 1
 				w = self.mg.select(self.word)
-				print("\t\tLexical retrieval of the word " + self.word )																		# tracking
+				print("\t\tLexical retrieval of the word '" + self.word + "'")																	# tracking
 				if len(w.ambiguous) > 0:  																										# lexical ambiguity is simply resolved by asking which item to pick-up (= generation task)
 					prompt = "'" + w.phon + "' is ambiguous, digit your disambiguation choice:\n"												# tracking (ambiguity resolution)
 					options = ""																												# tracking (ambiguity resolution)
@@ -89,7 +89,7 @@ class PMG_generate:
 					w = self.mg.select(w.ambiguous[int(choice)])																				# tracking (ambiguity resolution)
 					add_ambiguity()
 					add_encoding_penalty(w)
-					print("encoding penalty for ambiguous items added to '" + w.phon + "'")
+					print("encoding penalty of ambiguous item for '" + w.phon + "'")
 				set_encoding(w)
 				self.words_disambiguated.append(w.phon)
 
@@ -131,7 +131,7 @@ class PMG_generate:
 						if cn.has_parent():
 							self.mg.current_node = cn.parent
 					else:
-						if not is_phase_nested(cn):
+						if (not is_phase_nested(cn) or self.mg.sinking):
 							sequential_phase_mem_transmission(cn, w)
 							w.nesting_level += cn.nesting_level
 							print("\t\t" + w.phon + " is a sequential phase, memory transmitted")												# tracking
