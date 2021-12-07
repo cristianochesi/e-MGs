@@ -37,19 +37,19 @@ Quick Start Guide
 -----------------
 To run the "generate" procedure, execute this file in your Python shell (or run `Python3 <what follows>` or `Python <what follows>` from command line):
 
-e.g. `eMG_start.py -i "a a a b b b" -l lexicon\PMG_dict_ab.json -p parameters\PMG_param_default.json` 
+e.g. `eMG_run.py -i "a a a b b b" -l lexicon\PMG_dict_ab.json -p parameters\PMG_param_default.json` 
   (notice that ambiguity must be resolved in-line)
 
 Few examples to test specific constructions.
 - Canonical copular constructions (Italian lexicon):
 
-`eMG_start.py -i "le foto del muro sono la causa della rivolta" -l lexicon\PMG_dict_copular_ita.json -p parameters\PMG_param_ita.json`
+`eMG_run.py -i "le foto del muro sono la causa della rivolta" -l lexicon\PMG_dict_copular_ita.json -p parameters\PMG_param_ita.json`
 - Inverse copular constructions (Italian lexicon), change the -i option above with:
 
 `-i "la causa della rivolta sono le foto del muro"`
 - Subject Relative (English lexicon):
 
-`eMG_start.py -i "I saw the giraffe that kicked the cow" -l lexicon\eMG_dict_RC.json -p parameters\eMG_param_default.json`
+`eMG_run.py -i "I saw the giraffe that kicked the cow" -l lexicon\eMG_dict_RC.json -p parameters\eMG_param_default.json`
 - Object Relative, change the -i option above with:
 
 `-i "I saw the giraffe that the cow kicked"`
@@ -57,7 +57,7 @@ Few examples to test specific constructions.
 
 `-i "the giraffe that the cow kicked smiled"`
 
-`eMG_start.py` gets an input string `-i`, a lexicon file in json format `-l` and a parameter set `-p`. Simple lexica are provided to test the capabilities of the grammar (`PMG_dict_ab.json` implement counting recursion, `PMG_dict_RC.json` simple examples of Relative Clauses in English, `PMG_dict_copular_ita` include some classic example of subectraction from copular sentences etc.).
+`eMG_run.py` gets an input string `-i`, a lexicon file in json format `-l` and a parameter set `-p`. Simple lexica are provided to test the capabilities of the grammar (`PMG_dict_ab.json` implement counting recursion, `PMG_dict_RC.json` simple examples of Relative Clauses in English, `PMG_dict_copular_ita` include some classic example of subectraction from copular sentences etc.).
 Also parameterization files (json format) are provided as example, one default `PMG_param_default.json` with no special parameterization, and two specifying mandatory agreement categories in Italian and English (unification algorithm to be implemented).
 
 `eMG_grammar.py` implements the basic Merge, Move and Agree structure building operations as well as the Select function (lexical retrieval).

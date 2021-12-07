@@ -47,10 +47,10 @@ def get_ambiguities() -> int:
 
 def get_retrieval_cost(nodes, word):
 	retrieval = 0
-	for n in range(0, len(nodes)):
-		if nodes[n].phon == word:
-			if len(nodes[n].children) >= 1:
-				for child in nodes[n].children:
+	for n in nodes:
+		if n.phon == word:
+			if len(n.children) >= 1:
+				for child in n.children:
 					if child.phon.startswith("$t"):
 						retrieval += round(math.log(child.mem_outdex - child.mem_index), 2)
 	return retrieval
@@ -58,9 +58,9 @@ def get_retrieval_cost(nodes, word):
 
 def get_intervention_cost(nodes, word):
 	intervention = 0
-	for n in range(0, len(nodes)):
-		if nodes[n].phon == word:
-			intervention += nodes[n].retrieval
+	for n in nodes:
+		if n.phon == word:
+			intervention = n.retrieval
 	return intervention
 
 

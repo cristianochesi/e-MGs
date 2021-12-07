@@ -80,6 +80,7 @@ class PMG_grammar:
     agr_cats = []
     late_expansion = []
     late_expansion_default = False
+    sinking = False
     move_failures = 0
     merge_unexpected = 0
     nesting_level = 0
@@ -192,33 +193,37 @@ class PMG_grammar:
         label = []
         ambiguous = []
         n = 0
-        for x in self.lex[w]['expect'][0]:
-            expect.insert(n, self.lex[w]['expect'][0][x])
-            n += 1
-        n = 0
-        for x in self.lex[w]['expected'][0]:
-            expected.insert(n, self.lex[w]['expected'][0][x])
-            n += 1
-        n = 0
-        for x in self.lex[w]['label'][0]:
-            label.insert(n, self.lex[w]['label'][0][x])
-            n += 1
-        if 'ambiguous' in self.lex[w]:
-            n = 0
-            for x in self.lex[w]['ambiguous'][0]:
-                ambiguous.insert(n, self.lex[w]['ambiguous'][0][x])
+        if w in self.lex:
+            for x in self.lex[w]['expect'][0]:
+                expect.insert(n, self.lex[w]['expect'][0][x])
                 n += 1
-        w_tagged = eMG_node.PMG_node(w, expect, expected, label, self.lex[w]['agree'])
-        w_tagged.ambiguous = ambiguous
-        if 'doubling' in self.lex[w]:
-            w_tagged.doubling = True
-        if 'valued' in self.lex[w]:
-            w_tagged.valued = False
-        if self.needs_agree(w_tagged):
-            w_tagged.requires_agree = True
-        w_tagged.from_lex = True
-        w_tagged.index = 0
-        w_tagged.outdex = 0
+            n = 0
+            for x in self.lex[w]['expected'][0]:
+                expected.insert(n, self.lex[w]['expected'][0][x])
+                n += 1
+            n = 0
+            for x in self.lex[w]['label'][0]:
+                label.insert(n, self.lex[w]['label'][0][x])
+                n += 1
+            if 'ambiguous' in self.lex[w]:
+                n = 0
+                for x in self.lex[w]['ambiguous'][0]:
+                    ambiguous.insert(n, self.lex[w]['ambiguous'][0][x])
+                    n += 1
+            w_tagged = eMG_node.PMG_node(w, expect, expected, label, self.lex[w]['agree'])
+            w_tagged.ambiguous = ambiguous
+            if 'doubling' in self.lex[w]:
+                w_tagged.doubling = True
+            if 'valued' in self.lex[w]:
+                w_tagged.valued = False
+            if self.needs_agree(w_tagged):
+                w_tagged.requires_agree = True
+            w_tagged.from_lex = True
+            w_tagged.index = 0
+            w_tagged.outdex = 0
+        else:
+            print("\t\tUnknown word '" + w + "' in the lexicon")
+            w_tagged = eMG_node.PMG_node(w, expect, expected, label, "")
         return w_tagged
 
     def set_root(self, node: eMG_node):

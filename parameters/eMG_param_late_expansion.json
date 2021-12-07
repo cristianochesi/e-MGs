@@ -1,6 +1,6 @@
 {
-    "Agreement": {"expected": [{"0":"T"}], "expecting": [{"0":"case"}], "cued_agree": [{"0":"Y.Y.N"}], "default": "3.s"},
-    "Late_expansion": {"expected": [{}], "expect": [{}], "default": 1},
+    "Agreement": {"expected": [{}], "expect": [{}], "cued_agree": [{}], "default": ""},
+    "Late_expansion": {"expected": [{"0":"N", "1":"A"}], "expect": [{}], "default": 1},
     "Pied_piping": {"expected": [{}], "expect": [{}], "default": 0},
     "Sinking": {"expected": [{}], "expect": [{}], "default": 0},
     "Pro_drop": {"expected": [{}], "expect": [{}], "default": 0},
