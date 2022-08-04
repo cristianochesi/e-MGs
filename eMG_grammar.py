@@ -24,6 +24,11 @@ def sequential_phase_mem_transmission(last_phase: eMG_node, sequential_phase: eM
         last_phase.mem = []
 
 
+def nested_phase_mem_sinking(last_phase: eMG_node, sequential_phase: eMG_node):
+    if not is_mem_empty(last_phase):
+        sequential_phase.mem[0] = last_phase.mem.pop(0)
+
+
 def remove_expect(node: eMG_node):
     return node.expect.pop(0)
 
@@ -62,8 +67,6 @@ def agree(cn: eMG_node, w: eMG_node) -> bool:
 
 
 def move(cn: eMG_node, w: eMG_node):
-    print(
-        "\t\tMOVE: M-buffering '" + w.phon + "' (label = " + w.name + ") phase with expected feature '" + w.get_expected() + "' in the phase '" + cn.get_label() + "'")     # tracking
     m = copy.deepcopy(w)
     m.expect = []
     m.phon = "$t_{" + w.name + "}$"
@@ -91,6 +94,7 @@ class PMG_grammar:
     nodes = []
     word = None
     i = 0
+    tracking = True
 
     def __init__(self, lex):
         self.lex = {}
@@ -105,9 +109,10 @@ class PMG_grammar:
                         if agree(cn, w):
                             cn.agree_checked = True
                         else:
-                            return "Agreement failure"                                                               # tracking
-                    print(
-                        "\t\tMERGE SUCCESS: [" + cn.phon + " =" + cn.get_expect() + " [" + w.get_expected() + " " + w.phon + "]]")  # tracking
+                            if self.tracking:
+                                return "Agreement failure"                                                               # tracking
+                    if self.tracking:
+                        print("\t\tMERGE SUCCESS: [" + cn.phon + " =" + cn.get_expect() + " [" + w.get_expected() + " " + w.phon + "]]")  # tracking
                     if w.doubling:
                         choice = input(
                             "Do you want to remove [=" + cn.get_expect() + "] in '" + cn.phon + "'? [y] for 'yes remove' [n] for 'no' (choose [n] to capture post-V subject)\n")    # tracking
@@ -124,6 +129,8 @@ class PMG_grammar:
                         cn.label.pop(0)
                     if w.has_expected():
                         move(cn, w)
+                        if self.tracking:
+                            print("\t\tMOVE: M-buffering '" + w.phon + "' (label = " + w.name + ") phase with expected feature '" + w.get_expected() + "' in the phase '" + cn.get_label() + "'")  # tracking
                     return "OK"                                                                                      # tracking
                 elif self.late_expansion_default and self.can_late_expand(cn):  # fixme: can_late_expand strongly restrict the reconstruction possibilities to cases in which 2 expected categories are present and the second comply with the incoming item; remove and simply move the item in mem to implement full reconstruction + late expansion
                     if w.is_next_expected(cn):
@@ -138,23 +145,29 @@ class PMG_grammar:
                     cn.children.append(w)
                     w.parent = cn
                     if w.has_expected() and not w.is_in_mem():
-                        print("\t\tMERGE: expectation '" + cn.get_expect() + "' failed: missing feature '" + w.get_expected() + "'")         # tracking
+                        if self.tracking:
+                            print("\t\tMERGE: expectation '" + cn.get_expect() + "' failed: missing feature '" + w.get_expected() + "'")         # tracking
                         choice = input(
-                            "Do you want to Merge anyway? (this will trigger movement): [y] yes or [n] no?\n")
+                            "No expectation satisfied. Do you want to Merge '" + w.phon + "' anyway? (this will trigger movement): [y] yes or [n] no?\n")
                         while not (choice == "y" or choice == "n"):
                             choice = input(
-                                "Do you want to Merge anyway? (this will trigger movement): [y] yes or [n] no? (only [y] and [n] options are available)\n")
+                                "No expectation satisfied. Do you want to Merge '" + w.phon + "' anyway? (this will trigger movement): [y] yes or [n] no? (only [y] and [n] options are available)\n")
                         if choice == "y":
                             self.merge_unexpected += 1
                             add_encoding_penalty(w)
-                            print("encoding penalty for unexpected item assigned to " + w.phon)
+                            if self.tracking:
+                                print("encoding penalty for unexpected item assigned to " + w.phon)
                             move(cn, w)
+                            if self.tracking:
+                                print(
+                                    "\t\tMOVE: M-buffering '" + w.phon + "' (label = " + w.name + ") phase with expected feature '" + w.get_expected() + "' in the phase '" + cn.get_label() + "'")  # tracking
                         else:
                             return "No Merge attempted."                                                             # tracking
                     return "OK"                                                                                      # tracking
                 return "item unexpected and already in MEM"
             else:
-                print("\t\tMERGE: integration failed: '" + w.phon + "' does not have features to be expected ")      # tracking
+                if self.tracking:
+                    print("\t\tMERGE: integration failed: '" + w.phon + "' does not have features to be expected ")      # tracking
                 return "nothing to be expected"                                                                      # tracking
         elif not w.has_expected():
             if w.get_label() == "RC":                                                                                # fixme: PP and RC attachment problem
@@ -166,6 +179,9 @@ class PMG_grammar:
                 w.parent = cn
                 w.nesting_level = cn.nesting_level + 1
                 move(w, rc_head)
+                if self.tracking:
+                    print(
+                        "\t\tMOVE: M-buffering '" + w.phon + "' (label = " + w.name + ") phase with expected feature '" + w.get_expected() + "' in the phase '" + rc_head.get_label() + "'")  # tracking
                 return "OK"                                                                                          # tracking
             if w.get_label() == "PP":                                                                                # PP adjunct
                 choice = input("PP unselected. Do you want to Merge it as an adjuct? [y] yes or [n] no?\n")
@@ -182,7 +198,8 @@ class PMG_grammar:
                     return "No Merge attempted."
             return "MERGE: integration failed: '" + w.phon + "' cannot be selected and it is not an adjunct"        # tracking
         else:
-            print("\t\tMERGE: integration failed: '" + cn.phon + "' does not introduce any feature expectation")    # tracking
+            if self.tracking:
+                print("\t\tMERGE: integration failed: '" + cn.phon + "' does not introduce any feature expectation")    # tracking
             return "no further expectations"                                                                        # tracking
 
     # todo: implement trie and avoid LIFO memories
@@ -222,7 +239,8 @@ class PMG_grammar:
             w_tagged.index = 0
             w_tagged.outdex = 0
         else:
-            print("\t\tUnknown word '" + w + "' in the lexicon")
+            if self.tracking:
+                print("\t\tUnknown word '" + w + "' in the lexicon")
             w_tagged = eMG_node.PMG_node(w, expect, expected, label, "")
         return w_tagged
 

@@ -18,10 +18,10 @@ def main(argv):
 	lexicon_file = 'lexicon/eMG_dict_RC.json'
 	parameters_file = 'parameters/eMG_param_default.json'
 	input_sentence = "I saw the cow that the giraffe kicked"
-	verbose = True
+	silent = False
 
 	try:
-		opts, args = getopt.getopt(argv, "i:l:p:v:", ["input_sentence=", "lexicon_file=", "parameters_file=", "verbose="])
+		opts, args = getopt.getopt(argv, "i:l:p:s:", ["input_sentence=", "lexicon_file=", "parameters_file=", "silent="])
 	except getopt.GetoptError as e:
 		sys.stderr.write("%s %s\n" % (argv[0], e.msg))
 		sys.exit(1)
@@ -35,13 +35,13 @@ def main(argv):
 			lexicon_file = arg
 		elif opt in ("-p", "--parameters_file"):
 			parameters_file = arg
-		elif opt in ("-v", "--verbose"):
-			verbose = arg
+		elif opt in ("-s", "--silent"):
+			silent = True
 
 	print('Input: "' + input_sentence + '"')
 	print('Lexicon file: ', lexicon_file)
 	print('Parameter file: ', parameters_file)
-	print('Verbose: ', verbose)
+	print('Silent: ', silent)
 
 	g = PMG_generate(lexicon_file)
 	root = g.mg.select("ROOT")
@@ -59,6 +59,7 @@ def main(argv):
 	g.mg.set_late_expansion(late_expand)
 	g.mg.late_expansion_default = late_expand_default
 	g.mg.sinking = sinking
+	g.mg.tracking = not silent
 	g.sentence = input_sentence
 	g.generate(input_sentence.split())
 

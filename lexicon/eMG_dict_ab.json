@@ -1,41 +1,7 @@
 {
-    "ROOT":
-        {
-            "label": [{"0":"ROOT"}],
-            "expected": [{}],
-			"expect": [{"0":"A"}],
-			"agree":""
-        },
-    "a":
-        {
-            "label": [{}],
-            "expected": [{}],
-            "expect": [{}],
-            "ambiguous": [{"0":"a_s","1":"a_r"}],
-            "agree": ""
-        },
-
-    "a_s":
-        {
-            "label": [{"0":"A"}],
-            "expected": [{"0":"A"}],
-            "expect": [{"0":"B"}],
-            "agree": ""
-        },
-
-    "a_r":
-        {
-            "label": [{"0":"A"}],
-            "expected": [{"0":"A"}],
-            "expect": [{"0":"A","1":"B"}],
-            "agree": ""
-        },
-
-    "b":
-        {
-            "label": [{"0":"B"}],
-            "expected": [{"0":"B"}],
-            "expect": [{}],
-            "agree": ""
-        }
+    "ROOT": {"label": [{"0":"ROOT"}], "expected": [{}], "expect": [{"0":"A"}], "agree":""},
+    "a": {"label": [{}], "expected": [{}], "expect": [{}], "ambiguous": [{"0":"a_s","1":"a_r"}], "agree": ""},
+    "a_s": {"label": [{"0":"A"}], "expected": [{"0":"A"}], "expect": [{"0":"B"}], "agree": ""},
+    "a_r": {"label": [{"0":"A"}], "expected": [{"0":"A"}], "expect": [{"0":"A","1":"B"}], "agree": ""},
+    "b": {"label": [{"0":"B"}], "expected": [{"0":"B"}], "expect": [{}], "agree": ""}
 }
