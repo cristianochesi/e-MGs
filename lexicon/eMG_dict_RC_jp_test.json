@@ -1,0 +1,10 @@
+{
+  "ROOT": { "label": [{"0":"ROOT"}], "expected": [{}], "expect": [{"0":"Top"}], "agree":"" },
+  "Hanako": { "label": [{"0":"N"}], "expected": [{"0":"N"}], "expect": [{}], "agree": "" },
+  "-wa": { "label": [{"0":"D"}], "expected": [{"0":"Top"}], "expect": [{"0":"N","1":"T"}], "agree": "", "sinking": "" },
+  "-ga": { "label": [{"0":"Nom"}], "expected": [{"0":"Top"}], "expect": [{"0":"N","1":"T"}], "agree": "" },
+  "hon": { "label": [{"0":"N"}], "expected": [{"0":"N"}], "expect": [{}], "agree": "" },
+  "-o": { "label": [{"0":"Acc"}], "expected": [{"0":"Top"}], "expect": [{"0":"N","1":"V"}], "agree": "" },
+  "yon": { "label": [{"0":"V"}], "expected": [{"0":"V"}], "expect": [{}], "agree": "" },
+  "-da": { "label": [{"0":"T"}], "expected": [{"0":"T"}], "expect": [{}], "agree": "" }
+}

@@ -43,7 +43,7 @@ def main(argv):
 	print('Parameter file: ', parameters_file)
 	print('Silent: ', silent)
 
-	g = PMG_generate(lexicon_file)
+	g = MG_generate(lexicon_file)
 	root = g.mg.select("ROOT")
 	if root.ambiguous:
 		prompt = "Digit your ROOT choice:\n"

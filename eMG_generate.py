@@ -3,7 +3,7 @@ from eMG_tree import *
 from eMG_utilities import *
 
 
-class PMG_generate:
+class MG_generate:
 
 	def __init__(self, lexicon):
 		self.mg = PMG_grammar(lexicon)
