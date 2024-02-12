@@ -183,10 +183,10 @@ class PMG_grammar:
                     print(
                         "\t\tMOVE: M-buffering '" + w.phon + "' (label = " + w.name + ") phase with expected feature '" + w.get_expected() + "' in the phase '" + rc_head.get_label() + "'")  # tracking
                 return "OK"                                                                                          # tracking
-            if w.get_label() == "PP":                                                                                # PP adjunct
-                choice = input("PP unselected. Do you want to Merge it as an adjuct? [y] yes or [n] no?\n")
+            if w.get_label() == "AdvC" or w.get_label() == "PP":                                                                                # PP adjunct
+                choice = input("Unselected phrase compatible with an adjunct interpretation. Shall I proceed considering it an adjunct? [y] yes or [n] no?\n")
                 while not (choice == "y" or choice == "n"):
-                    choice = input("PP unselected. Do you want to Merge it as an adjuct? [y] yes or [n] no? (only [y] and [n] options are available)\n")
+                    choice = input("Unselected phrase compatible with an adjunct interpretation. Shall I proceed considering it an adjunct? [y] yes or [n] no? (only [y] and [n] options are available)\n")
                 if choice == "y":
                     self.merge_unexpected += 1
                     add_encoding_penalty(w)

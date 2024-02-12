@@ -3,5 +3,5 @@
     "John": {"label": [{"0":"D"}], "expected": [{"0":"case", "1":"D"}], "expect": [{}], "agree": ""},
     "what": {"label": [{"0":"D"}], "expected": [{"0":"wh", "1":"D"}], "expect": [{}], "agree": ""},
     "did": {"label": [{"0":"T"}], "expected": [{"0":"T"}], "expect": [{"0":"case", "1":"V"}], "agree": ""},
-    "ROOT": {"label": [{"0":"C_wh"}], "expected": [{}], "expect": [{"0":"wh","1":"T"}], "agree":""}
+    "ROOT": {"label": [{"0":"C_wh"}], "expected": [{}], "expect": [{"0":"wh","1":"T"}], "agree":""},
 }
