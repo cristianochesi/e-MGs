@@ -15,14 +15,17 @@ def main(argv):
 	global late_expand_default
 	global sinking
 
-	lexicon_file = 'lexicon/eMG_dict_RC.json'
-	#lexicon_file = 'lexicon/eMG_UD_ENG_extracted.json'
-	parameters_file = 'parameters/eMG_param_default.json'
-	#parameters_file = 'parameters/eMG_param_eng.json'
-	input_sentence = "I saw the cow that the giraffe kicked"
-	#input_sentence = "i see a tree."
+	#lexicon_file = 'lexicon/eMG_dict_RC.json'
+	#parameters_file = 'parameters/eMG_param_default.json'
+	#input_sentence = "I see three people who look like they are having a picnic"
+	#lexicon_file = 'lexicon/eMG_dict_RC.json'
+	lexicon_file = 'lexicon/eMG_UD_ENG_extracted.json'
+	#parameters_file = 'parameters/eMG_param_default.json'
+	parameters_file = 'parameters/eMG_param_eng.json'
+	#input_sentence = "I saw the cow that the giraffe kicked"
+	input_sentence = "i see a tree"
+	#silent = False
 	silent = False
-	#silent = True
 
 	try:
 		opts, args = getopt.getopt(argv, "i:l:p:s:", ["input_sentence=", "lexicon_file=", "parameters_file=", "silent="])
