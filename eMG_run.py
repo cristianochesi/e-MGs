@@ -20,7 +20,7 @@ def main(argv):
 	parameters_file = 'parameters/eMG_param_default.json'
 	#parameters_file = 'parameters/eMG_param_eng.json'
 	input_sentence = "I saw the cow that the giraffe kicked"
-	#input_sentence = "i see a tree"
+	#input_sentence = "i see a tree."
 	silent = False
 	#silent = True
 

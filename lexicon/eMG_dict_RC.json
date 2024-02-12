@@ -5,6 +5,7 @@
     "cow": {"label": [{"0":"N"}], "expected": [{"0":"N"}], "expect": [{}], "agree": ""},
     "giraffe": {"label": [{"0":"N"}], "expected": [{"0":"N"}], "expect": [{}], "agree": ""},
     "saw": {"label": [{"0":"T","1":"V"}], "expected": [{"0":"T"}], "expect": [{"0":"D", "1":"D"}], "agree": ""},
+    "loved": {"label": [{"0":"T","1":"V"}], "expected": [{"0":"T"}], "expect": [{"0":"D", "1":"D"}], "agree": ""},
     "kicked": {"label": [{"0":"T","1":"V"}], "expected": [{"0":"T"}], "expect": [{"0":"D", "1":"D"}], "agree": ""},
     "smiled": {"label": [{"0":"T","1":"V"}], "expected": [{"0":"T"}], "expect": [{"0":"D"}], "agree": ""},
     "ROOT": {"label": [{"0":"ROOT"}], "expected": [{}], "expect": [{"0":"T"}], "agree":""}
